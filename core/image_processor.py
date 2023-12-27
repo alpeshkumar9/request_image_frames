@@ -1,4 +1,3 @@
-import base64
 import os
 import pandas as pd
 import numpy as np
@@ -61,22 +60,17 @@ class ImageProcessor:
             pd.DataFrame: The preprocessed DataFrame.
         """
         for column in data.columns:
-            # Check for missing values
             if data[column].isnull().any():
                 if pd.api.types.is_numeric_dtype(data[column]):
-                    # Replace with mean, median, or a domain-specific value
-                    replacement_value = data[column].mean()  # or median()
+                    replacement_value = data[column].mean()
                     data[column].fillna(replacement_value, inplace=True)
                     self.logger.info(
                         f"Missing values in column {column} replaced with {replacement_value}.")
                 else:
-                    # For non-numeric data, consider mode or a custom strategy
-                    # Replace 'CustomValue' with an appropriate value
                     data[column].fillna('CustomValue', inplace=True)
                     self.logger.info(
                         f"Missing non-numeric values in column {column} replaced with 'CustomValue'.")
 
-            # Ensure numeric data type
             if not pd.api.types.is_numeric_dtype(data[column]):
                 self.logger.warning(
                     f"Non-numeric data found in column {column}. Converting to numeric.")
@@ -153,16 +147,13 @@ class ImageProcessor:
             binary_image (bytes): The binary image data.
         """
         try:
-            # Check if an image with the same depth already exists
             existing_image = db.query(ImageModel).filter(
                 ImageModel.depth == depth).first()
 
             if existing_image:
-                # Update existing record
                 existing_image.image = binary_image
                 self.logger.info(f"Updated image at depth: {depth}")
             else:
-                # Create a new record
                 new_image = ImageModel(depth=depth, image=binary_image)
                 db.add(new_image)
                 self.logger.info(f"Saved new image at depth: {depth}")

@@ -25,7 +25,6 @@ def get_db():
 async def startup_event():
     """Initializes the database and processes images on application startup."""
     db.init_db()
-    # Use the context manager to create a session for the startup event
     with db.get_db() as session:
         image_processor.process_images(session)
 

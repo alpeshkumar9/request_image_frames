@@ -1,9 +1,7 @@
 import os
 import pytest
 from fastapi.testclient import TestClient
-from sqlalchemy.orm import Session
 from main import app, Database, ImageProcessor
-from models import Image as ImageModel
 
 test_db = Database()
 test_image_processor = ImageProcessor('tests/test_data/img.csv')
