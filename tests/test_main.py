@@ -11,7 +11,7 @@ class TestMainEndpoints:
             (9040, 9041, 200, False),
             # Valid range but no results, expecting a 404 response
             (10000, 11000, 404, True),
-            # Invalid range (non-numeric), expecting an error response (404 or 422 depending on API design)
+            # Invalid range (non-numeric), expecting an error response
             ("abc", "def", 422, True),
             # Negative range, expecting a 404 response if the API treats this as invalid
             (-100, -1, 404, True),
