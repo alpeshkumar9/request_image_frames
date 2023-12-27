@@ -32,5 +32,12 @@ Before starting the server, if you want to run tests to ensure that everything i
 
 ## Run the application
 
+1. Without Docker
+
 - Run `python main.py` to start the application
+- Open your web browser and navigate to http://0.0.0.0:4080/docs or http://localhost:4080/docs to access the application interactive API.
+
+2. With Docker
+
+- Run `docker-compose up --build -d` to start the application
 - Open your web browser and navigate to http://0.0.0.0:4080/docs or http://localhost:4080/docs to access the application interactive API.
